@@ -12,7 +12,7 @@ export interface SelectOption<T extends string = string> {
 }
 
 interface SelectProps<T extends string> {
-  value: T | undefined
+  value: T | null | undefined
   onChange: (value: T) => void
   options: SelectOption<T>[]
   placeholder?: string
@@ -48,8 +48,10 @@ export function Select<T extends string = string>({
     <Field label={label} hint={hint} error={error} required={required}>
       {(id, describedBy) => (
         <SelectPrimitive.Root
-          value={value}
-          onValueChange={(next) => onChange(next as T)}
+          value={value ?? ''}
+          onValueChange={(next) => {
+            if (next !== '') onChange(next as T)
+          }}
           disabled={disabled}
         >
           <SelectPrimitive.Trigger
