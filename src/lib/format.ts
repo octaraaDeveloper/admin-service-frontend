@@ -67,5 +67,6 @@ export function formatCountdown(totalSeconds: number) {
 }
 
 function trim(value: number) {
-  return value.toFixed(value >= 100 ? 0 : value >= 10 ? 1 : 2).replace(/\.?0+$/, '')
+  const digits = value >= 100 ? 0 : value >= 10 ? 1 : 2
+  return value.toLocaleString('en-IN', { maximumFractionDigits: digits })
 }
