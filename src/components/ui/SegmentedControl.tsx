@@ -19,7 +19,7 @@ export function SegmentedControl<T extends string>({
     <div
       role="radiogroup"
       className={cn(
-        'inline-flex w-fit max-w-full gap-0.5 overflow-x-auto rounded-control border border-border bg-surface-sunken p-0.5',
+        'scrollbar-none inline-flex w-fit max-w-full gap-0.5 overflow-x-auto rounded-control border border-border bg-surface-sunken p-0.5',
         className,
       )}
     >
