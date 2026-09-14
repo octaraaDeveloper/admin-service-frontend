@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import logoLight from '@/assets/logo-light.svg'
 import { ThemeToggle } from '@/components/common/ThemeToggle'
 import { AuthRouteSkeleton } from '@/components/ui/Skeleton'
@@ -7,7 +7,9 @@ import { useAuthStore } from '@/store/auth'
 
 export function AuthLayout() {
   const token = useAuthStore((state) => state.token)
-  if (token) return <Navigate to="/" replace />
+  const { state } = useLocation()
+  const from = typeof state?.from === 'string' && state.from.startsWith('/') ? state.from : '/'
+  if (token) return <Navigate to={from} replace />
 
   return (
     <div className="flex min-h-dvh flex-col bg-surface-sunken lg:flex-row">
