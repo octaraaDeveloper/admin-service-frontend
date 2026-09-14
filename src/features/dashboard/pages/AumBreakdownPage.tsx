@@ -1,16 +1,16 @@
 import { useState } from 'react'
 import { dashboardApi } from '@/api/dashboard'
+import { Monogram, amcMonogram } from '@/components/common/Monogram'
 import type { Column } from '@/components/ui/DataTable'
 import { useQuery } from '@/hooks/useQuery'
 import { formatCurrency } from '@/lib/format'
 import type { AumBreakdownRow } from '@/types'
-import { AmcLogo } from '../components/AmcLogo'
 import { CardStat, DRILLDOWN_PAGE_SIZE, DrilldownPage } from '../components/DrilldownPage'
 
 function FundCell({ row }: { row: AumBreakdownRow }) {
   return (
     <div className="flex min-w-0 items-center gap-3">
-      <AmcLogo shortName={row.amcShortName} color={row.amcColor} />
+      <Monogram label={amcMonogram(row.amcShortName)} color={row.amcColor} />
       <div className="min-w-0">
         <p className="truncate font-medium text-text-primary">{row.fundName}</p>
         <p className="truncate text-2xs font-medium text-text-placeholder">{row.category}</p>

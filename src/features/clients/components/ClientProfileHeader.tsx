@@ -2,7 +2,7 @@ import { Repeat, Trash2, Users } from 'lucide-react'
 import { Breadcrumbs } from '@/components/common'
 import { Avatar, Button, IconButton, LinkButton } from '@/components/ui'
 import type { ClientProfile } from '@/types'
-import { KycStatusText } from './KycBadge'
+import { KycStatusText } from './KycStatusText'
 
 interface ClientProfileHeaderProps {
   client: ClientProfile

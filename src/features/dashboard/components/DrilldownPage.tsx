@@ -14,7 +14,7 @@ import type { Paginated } from '@/types'
 
 export const DRILLDOWN_PAGE_SIZE = 8
 
-export interface CsvExport<T> {
+interface CsvExport<T> {
   filename: string
   headers: string[]
   row: (row: T) => (string | number)[]

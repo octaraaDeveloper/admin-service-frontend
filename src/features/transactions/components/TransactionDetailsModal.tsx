@@ -2,13 +2,13 @@ import { Check, ChevronRight, Forward, Trash2, X } from 'lucide-react'
 import { type ReactNode, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { Avatar, Button, Modal } from '@/components/ui'
+import { Avatar, Button, Modal, StatusBadge } from '@/components/ui'
 import { formatCurrency, formatDateTime, formatDecimal, formatPercent } from '@/lib/format'
 import { cn, pluralize } from '@/lib/utils'
 import type { Transaction, TransactionEvent } from '@/types'
 
 import { orderTypeLabels } from '../labels'
-import { AssetBadge, TransactionStatusBadge } from './TransactionsTable'
+import { AssetBadge } from './TransactionsTable'
 
 interface TransactionDetailsModalProps {
   /** `null` closes the modal; the last transaction stays rendered for the exit animation. */
@@ -127,7 +127,7 @@ export function TransactionDetailsModal({
             </p>
             <p className="mt-1 text-xs text-text-muted">{formatDateTime(current.createdAt)}</p>
           </div>
-          <TransactionStatusBadge status={current.status} />
+          <StatusBadge status={current.status} dot />
         </div>
 
         {showClient && (

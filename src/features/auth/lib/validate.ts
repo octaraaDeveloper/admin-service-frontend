@@ -1,6 +1,6 @@
 import { isValidEmail } from '@/lib/validation'
 
-export const MIN_PASSWORD_LENGTH = 8
+const MIN_PASSWORD_LENGTH = 8
 
 export function emailError(value: string) {
   if (!value.trim()) return 'Email address is required'

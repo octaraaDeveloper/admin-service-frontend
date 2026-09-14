@@ -72,15 +72,17 @@ export function toneForStatus(status: string): BadgeTone {
 
 export function StatusBadge({
   status,
+  dot,
   className,
   label,
 }: {
   status: string
+  dot?: boolean
   className?: string
   label?: string
 }) {
   return (
-    <Badge tone={toneForStatus(status)} className={cn('capitalize', className)}>
+    <Badge tone={toneForStatus(status)} dot={dot} className={cn('capitalize', className)}>
       {label ?? status.replaceAll('_', ' ')}
     </Badge>
   )

@@ -94,9 +94,3 @@ export function tenureLabel(months: number) {
   }
   return `${months} Months`
 }
-
-/**
- * Radix Select treats `undefined` as "uncontrolled": once the user has picked an option, clearing
- * the value back to null would keep showing the stale internal selection. Always hand it a string
- * ('' renders the placeholder) so the control stays controlled for its whole lifetime.
- */

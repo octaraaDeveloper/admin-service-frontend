@@ -1,9 +1,8 @@
 import type { ApiError } from '@/api/client'
-import { EmptyState } from '@/components/common'
+import { EmptyState, Monogram, ReturnValue, amcMonogram } from '@/components/common'
 import { DataTable, LinkButton, type Column } from '@/components/ui'
 import { formatCurrency } from '@/lib/format'
 import type { ClientHolding } from '@/types'
-import { FundLogo, ReturnText } from './FundLogo'
 
 const headerClass = 'text-xs tracking-wide'
 
@@ -15,7 +14,7 @@ const columns: Column<ClientHolding>[] = [
     className: 'whitespace-normal',
     cell: (holding) => (
       <div className="flex items-center gap-3">
-        <FundLogo shortName={holding.amcShortName} color={holding.amcColor} />
+        <Monogram label={amcMonogram(holding.amcShortName)} color={holding.amcColor} />
         <div className="min-w-0">
           <p className="font-medium text-text-primary">{holding.fundName}</p>
           <p className="text-xs text-text-muted">{holding.category}</p>
@@ -42,7 +41,7 @@ const columns: Column<ClientHolding>[] = [
     header: 'RETURNS',
     align: 'right',
     headerClassName: headerClass,
-    cell: (holding) => <ReturnText value={holding.returnsPct} />,
+    cell: (holding) => <ReturnValue value={holding.returnsPct} digits={1} />,
   },
 ]
 
@@ -50,7 +49,7 @@ function HoldingCard({ holding }: { holding: ClientHolding }) {
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-3">
-        <FundLogo shortName={holding.amcShortName} color={holding.amcColor} size="sm" />
+        <Monogram label={amcMonogram(holding.amcShortName)} color={holding.amcColor} size="sm" />
         <div className="min-w-0">
           <p className="truncate text-base font-medium text-text-primary">{holding.fundName}</p>
           <p className="text-xs text-text-muted">{holding.category}</p>
@@ -76,7 +75,7 @@ function HoldingCard({ holding }: { holding: ClientHolding }) {
         <div className="text-right">
           <dt className="text-2xs font-semibold tracking-wide text-text-muted uppercase">Return</dt>
           <dd className="mt-0.5 text-sm">
-            <ReturnText value={holding.returnsPct} />
+            <ReturnValue value={holding.returnsPct} digits={1} />
           </dd>
         </div>
       </dl>

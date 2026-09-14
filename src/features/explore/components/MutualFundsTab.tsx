@@ -1,7 +1,7 @@
 import { SlidersHorizontal } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { fundsApi } from '@/api/funds'
-import { EmptyState } from '@/components/common/states'
+import { EmptyState, Monogram, ReturnValue, RiskBadge, amcMonogram } from '@/components/common'
 import {
   Button,
   DataTable,
@@ -15,14 +15,11 @@ import { useQuery } from '@/hooks/useQuery'
 import { formatCompactCurrency, formatPercent } from '@/lib/format'
 import type { FundSortKey, ListRequest, MutualFundListItem } from '@/types'
 import { useExploreParams } from '../hooks/useExploreParams'
-import { AmcLogo } from './AmcLogo'
 import { FundDetailsModal } from './FundDetailsModal'
 import { FundFilters } from './FundFilters'
 import { FundFiltersSheet } from './FundFiltersSheet'
 import { FundMobileCard } from './FundMobileCard'
 import { RatingStars } from './RatingStars'
-import { ReturnValue } from './ReturnValue'
-import { RiskBadge } from './RiskBadge'
 import { SortableHeader } from './SortableHeader'
 
 const PAGE_SIZE = 10
@@ -39,7 +36,7 @@ function buildColumns(sortable: SortableRenderer): Column<MutualFundListItem>[] 
       className: 'min-w-64 max-w-80 whitespace-normal',
       cell: (fund) => (
         <div className="flex items-center gap-3">
-          <AmcLogo amc={fund.amc} />
+          <Monogram label={amcMonogram(fund.amc.shortName)} color={fund.amc.logoColor} />
           <div className="min-w-0">
             <p className="font-medium text-text-primary">{fund.name}</p>
             <p className="text-xs text-text-secondary">{fund.amc.shortName}</p>

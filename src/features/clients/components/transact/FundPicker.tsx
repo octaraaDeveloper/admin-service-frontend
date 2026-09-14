@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { transactApi } from '@/api/transact'
+import { Monogram, ReturnValue, amcMonogram } from '@/components/common'
 import {
   Button,
   controlClass,
@@ -14,7 +15,6 @@ import { useQuery } from '@/hooks/useQuery'
 import { formatCurrency, formatDecimal, formatNumber, formatPercent } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { Amc, FundDetails } from '@/types'
-import { AmcMark } from './AmcMark'
 
 const shortDate = new Intl.DateTimeFormat('en-IN', {
   day: '2-digit',
@@ -92,7 +92,7 @@ function FundOptionRow({
         selected && 'bg-brand-tint/60',
       )}
     >
-      <AmcMark amc={amc} size="sm" />
+      <Monogram label={amc ? amcMonogram(amc.shortName) : ''} color={amc?.logoColor} />
       <div className="min-w-0 flex-1">
         <p className="truncate text-sm font-medium text-text-primary">{fund.name}</p>
         <div className="mt-1 flex flex-wrap gap-1">
@@ -106,13 +106,8 @@ function FundOptionRow({
         <p className="text-sm font-medium text-text-primary tabular-nums">
           ₹{formatDecimal(fund.nav)}
         </p>
-        <p
-          className={cn(
-            'text-2xs font-medium tabular-nums',
-            fund.returns1y >= 0 ? 'text-success' : 'text-danger',
-          )}
-        >
-          {formatPercent(fund.returns1y, 1, true)} 1Y
+        <p className="text-2xs text-text-muted">
+          <ReturnValue value={fund.returns1y} digits={1} /> 1Y
         </p>
       </div>
     </button>
@@ -125,6 +120,7 @@ export function FundPicker({ amcId, amcs, value, onChange, onClearAmc, error }: 
   const [expanded, setExpanded] = useState(false)
   const amcOf = (id: string) => amcs.find((amc) => amc.id === id)
   const selectedAmc = amcId ? amcOf(amcId) : undefined
+  const selectedFundAmc = value ? amcOf(value.amcId) : undefined
 
   const { data: funds, loading } = useQuery(
     `transact:funds:${amcId ?? 'all'}:${search.trim().toLowerCase()}`,
@@ -139,8 +135,17 @@ export function FundPicker({ amcId, amcs, value, onChange, onClearAmc, error }: 
       aria-expanded={open}
       className="flex min-w-0 flex-1 items-center gap-3 rounded-lg p-3 text-left focus-ring sm:p-4"
     >
-      <AmcMark amc={amcOf(value.amcId)} size="md" className="hidden sm:inline-flex" />
-      <AmcMark amc={amcOf(value.amcId)} size="sm" className="sm:hidden" />
+      <Monogram
+        label={selectedFundAmc ? amcMonogram(selectedFundAmc.shortName) : ''}
+        color={selectedFundAmc?.logoColor}
+        size="lg"
+        className="hidden sm:inline-flex"
+      />
+      <Monogram
+        label={selectedFundAmc ? amcMonogram(selectedFundAmc.shortName) : ''}
+        color={selectedFundAmc?.logoColor}
+        className="sm:hidden"
+      />
       <div className="min-w-0 flex-1">
         <p className="text-[15px] leading-5 font-medium text-text-primary">{value.name}</p>
         <p className="mt-0.5 text-xs text-text-muted">
@@ -210,7 +215,7 @@ export function FundPicker({ amcId, amcs, value, onChange, onClearAmc, error }: 
                 {loading && !funds ? (
                   Array.from({ length: 4 }, (_, index) => (
                     <div key={index} className="flex items-center gap-3 px-3 py-2.5">
-                      <Skeleton className="size-10 rounded-full" />
+                      <Skeleton className="size-9 rounded-full" />
                       <div className="flex-1 space-y-2">
                         <Skeleton className="h-3.5 w-3/4" />
                         <Skeleton className="h-3 w-1/2" />

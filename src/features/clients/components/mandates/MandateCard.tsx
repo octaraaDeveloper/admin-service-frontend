@@ -9,7 +9,7 @@ const statusClass: Record<AutoMandate['status'], string> = {
   Processing: 'text-warning',
 }
 
-export function formatValidTill(date: string) {
+function formatValidTill(date: string) {
   return new Date(date).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })
 }
 

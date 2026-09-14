@@ -188,7 +188,7 @@ const featuredHoldings: [string, number, number, number | null][] = [
   ['mf-005', 310000, 337203, 5000],
 ]
 
-export function holdingsFor(client: Client): ClientHolding[] {
+function holdingsFor(client: Client): ClientHolding[] {
   const override = holdingOverrides.get(client.id)
   if (override) return override
   const index = clientIndex(client)
@@ -215,7 +215,7 @@ export function holdingsFor(client: Client): ClientHolding[] {
   })
 }
 
-export function summarize(holdings: ClientHolding[]): ClientPortfolioSummary {
+function summarize(holdings: ClientHolding[]): ClientPortfolioSummary {
   const invested = holdings.reduce((sum, holding) => sum + holding.invested, 0)
   const current = holdings.reduce((sum, holding) => sum + holding.current, 0)
   const returns = current - invested

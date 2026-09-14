@@ -23,7 +23,7 @@ import type {
   SipMandate,
 } from '@/types'
 
-export interface FundListRequest {
+interface FundListRequest {
   amcId?: string | null
   search?: string
 }

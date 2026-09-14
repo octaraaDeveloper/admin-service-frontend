@@ -14,7 +14,6 @@ import type {
   OrderSide,
   SipFrequency,
 } from '@/types'
-import { AmcMark } from './AmcMark'
 import { AmountField } from './AmountField'
 import { estimateUnits, nextSipDate } from './calculations'
 import { ExistingInvestmentCard, MfHoldingDetails } from './ExistingInvestmentCard'
@@ -218,7 +217,11 @@ export function MutualFundForm({ client }: { client: Client }) {
           value: amc.id,
           label: (
             <span className="inline-flex items-center gap-2">
-              <AmcMark amc={amc} size="xs" />
+              <span
+                className="size-5 shrink-0 rounded-full"
+                style={{ backgroundColor: amc.logoColor }}
+                aria-hidden
+              />
               {amc.name}
             </span>
           ),

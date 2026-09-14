@@ -1,15 +1,13 @@
 import { ChevronRight } from 'lucide-react'
 import { useState } from 'react'
 import { fundsApi } from '@/api/funds'
-import { EmptyState, ErrorState } from '@/components/common/states'
+import { EmptyState, ErrorState, Monogram, ReturnValue, amcMonogram } from '@/components/common'
 import { Badge, Button, SearchInput, Skeleton } from '@/components/ui'
 import { useQuery } from '@/hooks/useQuery'
 import { formatCompactCurrency } from '@/lib/format'
 import { pluralize } from '@/lib/utils'
 import type { AmcSummary } from '@/types'
 import { useExploreParams } from '../hooks/useExploreParams'
-import { AmcLogo } from './AmcLogo'
-import { ReturnValue } from './ReturnValue'
 
 function AmcCard({ amc, onSelect }: { amc: AmcSummary; onSelect: (id: string) => void }) {
   return (
@@ -19,7 +17,7 @@ function AmcCard({ amc, onSelect }: { amc: AmcSummary; onSelect: (id: string) =>
       className="flex w-full flex-col gap-3 card p-4 text-left focus-ring transition-colors hover:border-border-strong hover:bg-surface-raised"
     >
       <div className="flex items-center gap-3">
-        <AmcLogo amc={amc} size="lg" />
+        <Monogram label={amcMonogram(amc.shortName)} color={amc.logoColor} size="lg" />
         <div className="min-w-0 flex-1">
           <p className="truncate text-base font-medium text-text-primary">{amc.name}</p>
           <p className="text-xs text-text-secondary">

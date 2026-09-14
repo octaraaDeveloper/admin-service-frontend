@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
+import { Monogram } from '@/components/common'
 import { Input, Select } from '@/components/ui'
 import type { BankDetails, OnboardingFormOptions } from '@/types'
-import { BankLogo } from '../BankLogo'
 import { SearchableSelect } from '../SearchableSelect'
 import type { FieldErrors } from '../onboardingState'
 import { ACCOUNT_MISMATCH } from '../validation'
@@ -21,7 +21,7 @@ export function BankDetailsStep({ value, onChange, errors, options }: BankDetail
       options.banks.map((bank) => ({
         value: bank.id,
         label: bank.name,
-        leading: <BankLogo bank={bank} />,
+        leading: <Monogram label={bank.initials} color={bank.color} />,
       })),
     [options.banks],
   )

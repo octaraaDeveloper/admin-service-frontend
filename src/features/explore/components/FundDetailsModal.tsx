@@ -1,7 +1,14 @@
 import { ArrowDownRight, ArrowRight, ArrowUpRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { fundsApi } from '@/api/funds'
-import { ErrorState } from '@/components/common/states'
+import {
+  ErrorState,
+  Monogram,
+  ReturnValue,
+  RiskBadge,
+  amcMonogram,
+  returnTone,
+} from '@/components/common'
 import { Avatar, Badge, Button, LinkButton, Modal, Skeleton } from '@/components/ui'
 import { useQuery } from '@/hooks/useQuery'
 import { cn } from '@/lib/utils'
@@ -15,13 +22,10 @@ import {
 } from '@/lib/format'
 import type { MutualFundDetails } from '@/types'
 import { AllocationBar } from './AllocationBar'
-import { AmcLogo } from './AmcLogo'
 import { DetailList } from './DetailList'
 import { FundHoldingsTable } from './FundHoldingsTable'
 import { FundPerformanceChart } from './FundPerformanceChart'
 import { RatingStars } from './RatingStars'
-import { ReturnValue, returnTone } from './ReturnValue'
-import { RiskBadge } from './RiskBadge'
 
 interface FundDetailsModalProps {
   fundId: string | null
@@ -51,7 +55,7 @@ function FundDetailsBody({ fund }: { fund: MutualFundDetails }) {
   return (
     <div className="space-y-6">
       <div className="flex items-start gap-4">
-        <AmcLogo amc={fund.amc} size="lg" />
+        <Monogram label={amcMonogram(fund.amc.shortName)} color={fund.amc.logoColor} size="lg" />
         <div className="min-w-0 flex-1 space-y-2">
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
             <p className="text-xl font-semibold text-text-primary tabular-nums">

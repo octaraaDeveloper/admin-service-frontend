@@ -1,4 +1,4 @@
-import type { FdReturnType, SipFrequency } from '@/types'
+import type { FdReturnType } from '@/types'
 
 export function parseAmount(raw: string) {
   const digits = raw.replaceAll(/\D/g, '')
@@ -17,10 +17,6 @@ export function nextSipDate(day: number, from = new Date()) {
   const candidate = new Date(from.getFullYear(), from.getMonth(), day)
   if (candidate <= from) candidate.setMonth(candidate.getMonth() + 1)
   return candidate
-}
-
-export function sipInstalmentsPerYear(frequency: SipFrequency) {
-  return frequency === 'quarterly' ? 4 : 12
 }
 
 export function addMonths(date: Date, months: number) {

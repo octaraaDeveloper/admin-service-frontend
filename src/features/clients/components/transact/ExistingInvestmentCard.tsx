@@ -15,22 +15,16 @@ import {
   Wallet,
 } from 'lucide-react'
 import type { ReactNode } from 'react'
-import { Badge, Card, LinkButton, Skeleton, type BadgeTone } from '@/components/ui'
+import { RiskBadge } from '@/components/common'
+import { Badge, Card, LinkButton, Skeleton } from '@/components/ui'
 import { formatCurrency, formatDate, formatDecimal, formatPercent } from '@/lib/format'
 import { cn } from '@/lib/utils'
-import type { FdHolding, FdProvider, FundDetails, MfHolding, RiskLevel } from '@/types'
+import type { FdHolding, FdProvider, FundDetails, MfHolding } from '@/types'
 import { holdingDuration } from './calculations'
 import { HoldingChart } from './HoldingChart'
 import { maturityInstructionLabels, payoutLabels, returnTypeLabels, tenureLabel } from './options'
 
 const monthYear = new Intl.DateTimeFormat('en-IN', { month: 'short', year: 'numeric' })
-
-const riskTones: Record<RiskLevel, BadgeTone> = {
-  Low: 'success',
-  Medium: 'warning',
-  High: 'accent',
-  'Very High': 'danger',
-}
 
 interface ExistingInvestmentCardProps {
   title: string
@@ -220,7 +214,7 @@ export function MfHoldingDetails({ holding, fund }: { holding: MfHolding; fund: 
         <HoldingRow
           icon={<Gauge />}
           label="Risk Profile"
-          value={<Badge tone={riskTones[fund.risk]}>{fund.risk}</Badge>}
+          value={<RiskBadge risk={fund.risk} outline={false} />}
         />
         <HoldingRow
           icon={<Tag />}

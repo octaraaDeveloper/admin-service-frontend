@@ -6,21 +6,20 @@ import type { ApiError } from '@/api/client'
 import { EmptyState } from '@/components/common'
 import {
   Avatar,
-  Badge,
   type Column,
   DataTable,
   DropdownMenu,
   IconButton,
   Pagination,
   type Selection,
+  StatusBadge,
   keyOf,
-  toneForStatus,
 } from '@/components/ui'
 import { formatCurrency, formatDateTime } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { Paginated, Transaction, TransactionAsset } from '@/types'
 
-import { orderTypeLabels, statusLabels } from '../labels'
+import { orderTypeLabels } from '../labels'
 
 interface TransactionsTableProps {
   data: Paginated<Transaction> | undefined
@@ -49,14 +48,6 @@ export function AssetBadge({ asset, className }: { asset: TransactionAsset; clas
     >
       {asset}
     </span>
-  )
-}
-
-export function TransactionStatusBadge({ status }: { status: Transaction['status'] }) {
-  return (
-    <Badge tone={toneForStatus(status)} dot>
-      {statusLabels[status]}
-    </Badge>
   )
 }
 
@@ -121,7 +112,7 @@ function MobileCard({ row, showClient }: { row: Transaction; showClient: boolean
       )}
       <div className="flex items-center justify-between gap-3">
         <span className="text-xs text-text-muted">{formatDateTime(row.createdAt)}</span>
-        <TransactionStatusBadge status={row.status} />
+        <StatusBadge status={row.status} dot />
       </div>
     </div>
   )
@@ -206,7 +197,7 @@ const baseColumns: Column<Transaction>[] = [
     key: 'status',
     header: 'Status',
     align: 'center',
-    cell: (row) => <TransactionStatusBadge status={row.status} />,
+    cell: (row) => <StatusBadge status={row.status} dot />,
   },
 ]
 

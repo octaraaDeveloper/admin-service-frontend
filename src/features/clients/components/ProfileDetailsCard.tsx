@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Card } from '@/components/ui'
 import { formatDate } from '@/lib/format'
 import type { ClientProfile } from '@/types'
-import { KycStatusText } from './KycBadge'
+import { KycStatusText } from './KycStatusText'
 
 function formatMobile(mobile: string) {
   return mobile.length === 10 ? `+91 ${mobile.slice(0, 5)} ${mobile.slice(5)}` : mobile

@@ -1,9 +1,7 @@
+import { Monogram, ReturnValue, RiskBadge, amcMonogram } from '@/components/common'
 import { formatCompactCurrency, formatPercent } from '@/lib/format'
 import type { MutualFundListItem } from '@/types'
-import { AmcLogo } from './AmcLogo'
 import { RatingStars } from './RatingStars'
-import { ReturnValue } from './ReturnValue'
-import { RiskBadge } from './RiskBadge'
 
 export function FundMobileCard({ fund }: { fund: MutualFundListItem }) {
   const returns = [
@@ -14,7 +12,12 @@ export function FundMobileCard({ fund }: { fund: MutualFundListItem }) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-start gap-2.5">
-        <AmcLogo amc={fund.amc} size="sm" className="mt-0.5" />
+        <Monogram
+          label={amcMonogram(fund.amc.shortName)}
+          color={fund.amc.logoColor}
+          size="sm"
+          className="mt-0.5"
+        />
         <div className="min-w-0 flex-1">
           <p className="text-base font-medium text-text-primary">{fund.name}</p>
           <p className="text-xs text-text-placeholder">

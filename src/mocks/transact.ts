@@ -12,7 +12,7 @@ import type {
 } from '@/types'
 import { fixedDepositSchemes, mutualFunds } from './funds'
 
-export const NAV_DATE = '2026-09-11'
+const NAV_DATE = '2026-09-11'
 
 const launchDates: Record<string, string> = {
   'mf-001': '2022-08-22',

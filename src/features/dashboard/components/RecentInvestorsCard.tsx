@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { dashboardApi } from '@/api/dashboard'
 import { EmptyState } from '@/components/common/states'
+import { StatusBadge } from '@/components/ui/Badge'
 import { DataTable, keyOf, type Column } from '@/components/ui/DataTable'
 import { DropdownMenu } from '@/components/ui/DropdownMenu'
 import { IconButton } from '@/components/ui/IconButton'
@@ -12,7 +13,6 @@ import { useQuery } from '@/hooks/useQuery'
 import { formatCurrency, formatDate } from '@/lib/format'
 import type { RecentInvestor, RecentInvestorsKycFilter } from '@/types'
 import { InvestorCell } from './InvestorCell'
-import { KycBadge } from './KycBadge'
 import { SectionHeader } from './SectionHeader'
 
 const kycFilters: { value: RecentInvestorsKycFilter; label: string }[] = [
@@ -42,7 +42,7 @@ const columns: Column<RecentInvestor>[] = [
     key: 'kyc',
     header: 'KYC',
     align: 'center',
-    cell: (row) => <KycBadge status={row.kycStatus} />,
+    cell: (row) => <StatusBadge status={row.kycStatus} dot />,
   },
   {
     key: 'profile',
@@ -63,7 +63,7 @@ function renderMobileCard(row: RecentInvestor) {
       />
       <div className="flex shrink-0 flex-col items-end gap-1">
         <span className="text-sm font-semibold text-text-primary">{formatCurrency(row.aum)}</span>
-        <KycBadge status={row.kycStatus} />
+        <StatusBadge status={row.kycStatus} dot />
       </div>
     </div>
   )

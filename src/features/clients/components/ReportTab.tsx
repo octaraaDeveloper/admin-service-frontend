@@ -1,7 +1,7 @@
 import { Download } from 'lucide-react'
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts'
 import { clientsApi } from '@/api/clients'
-import { EmptyState, ErrorState } from '@/components/common'
+import { EmptyState, ErrorState, Monogram, ReturnValue, amcMonogram } from '@/components/common'
 import {
   Avatar,
   Badge,
@@ -18,7 +18,6 @@ import { formatCompactCurrency, formatCurrency, formatDate, formatPercent } from
 import { downloadCsv } from '@/lib/utils'
 import { toast } from '@/store/toast'
 import type { ClientAllocationSlice, ClientHolding, ClientProfile, ClientReport } from '@/types'
-import { FundLogo, ReturnText } from './FundLogo'
 import { SummaryTiles } from './PortfolioTab'
 
 const chartColors = [
@@ -38,7 +37,7 @@ const fundColumns: Column<ClientHolding>[] = [
     className: 'whitespace-normal',
     cell: (holding) => (
       <div className="flex items-center gap-3">
-        <FundLogo shortName={holding.amcShortName} color={holding.amcColor} size="sm" />
+        <Monogram label={amcMonogram(holding.amcShortName)} color={holding.amcColor} size="sm" />
         <div className="min-w-0">
           <p className="font-medium text-text-primary">{holding.fundName}</p>
           <p className="text-xs text-text-muted">Direct Growth · Folio {holding.folio}</p>
@@ -89,7 +88,7 @@ const fundColumns: Column<ClientHolding>[] = [
     header: 'XIRR',
     align: 'right',
     headerClassName: headerClass,
-    cell: (holding) => <ReturnText value={holding.xirr} digits={2} />,
+    cell: (holding) => <ReturnValue value={holding.xirr} digits={2} />,
   },
   {
     key: 'sip',
@@ -114,7 +113,7 @@ function FundCard({ holding }: { holding: ClientHolding }) {
     <div className="space-y-3">
       <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <FundLogo shortName={holding.amcShortName} color={holding.amcColor} size="sm" />
+          <Monogram label={amcMonogram(holding.amcShortName)} color={holding.amcColor} size="sm" />
           <div className="min-w-0">
             <p className="truncate text-base font-medium text-text-primary">{holding.fundName}</p>
             <p className="text-xs text-text-muted">{holding.category}</p>
@@ -142,7 +141,7 @@ function FundCard({ holding }: { holding: ClientHolding }) {
         <div className="text-right">
           <dt className="text-2xs font-semibold tracking-wide text-text-muted uppercase">XIRR</dt>
           <dd className="mt-0.5">
-            <ReturnText value={holding.xirr} digits={2} />
+            <ReturnValue value={holding.xirr} digits={2} />
           </dd>
         </div>
       </dl>
@@ -255,7 +254,7 @@ function MembersCard({ report }: { report: ClientReport }) {
               </div>
               <p className="mt-1 text-xs text-text-muted tabular-nums">
                 Invested {formatCompactCurrency(member.invested)} ·{' '}
-                <ReturnText value={member.gainPct} className="font-normal" />
+                <ReturnValue value={member.gainPct} digits={1} className="font-normal" />
               </p>
             </div>
           </div>

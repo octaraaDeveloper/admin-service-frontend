@@ -8,7 +8,7 @@ import type { MutualFundQuery } from '../hooks/useExploreParams'
 
 const riskLevels: RiskLevel[] = ['Low', 'Medium', 'High', 'Very High']
 
-export const sortOptions: SelectOption<FundSortKey>[] = [
+const sortOptions: SelectOption<FundSortKey>[] = [
   { value: 'returns1y', label: '1Y returns' },
   { value: 'returns3y', label: '3Y returns' },
   { value: 'returns5y', label: '5Y returns' },

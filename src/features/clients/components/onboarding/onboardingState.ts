@@ -65,7 +65,7 @@ export function nomineeField(id: string, field: keyof Nominee) {
   return `${id}.${field}`
 }
 
-export function emptyNominee(index: number, allocation: number): Nominee {
+function emptyNominee(index: number, allocation: number): Nominee {
   return {
     id: `nominee-${index}-${Date.now()}`,
     name: '',

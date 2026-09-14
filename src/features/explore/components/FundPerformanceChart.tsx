@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import { Area, AreaChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { ReturnValue } from '@/components/common'
 import { SegmentedControl } from '@/components/ui'
 import { formatDate, formatDecimal } from '@/lib/format'
 import type { NavPoint } from '@/types'
-import { ReturnValue } from './ReturnValue'
 
 type Range = '1M' | '6M' | '1Y' | '3Y' | '5Y'
 

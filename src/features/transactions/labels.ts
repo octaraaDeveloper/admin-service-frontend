@@ -17,7 +17,7 @@ export const defaultFilters: TransactionFilters = {
   range: 'this-month',
 }
 
-export const assetLabels: Record<TransactionAsset, string> = {
+const assetLabels: Record<TransactionAsset, string> = {
   MF: 'Mutual Funds',
   FD: 'Fixed Deposits',
 }
@@ -45,7 +45,7 @@ const orderTypeFilterLabels: Record<TransactionOrderType, string> = {
   fd: 'FD',
 }
 
-export const rangeLabels: Record<TransactionRange, string> = {
+const rangeLabels: Record<TransactionRange, string> = {
   'this-month': 'This month',
   '7d': 'Last 7 days',
   '30d': 'Last 30 days',

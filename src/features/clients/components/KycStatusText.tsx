@@ -1,4 +1,4 @@
-import { Badge, toneForStatus, type BadgeTone } from '@/components/ui'
+import { toneForStatus, type BadgeTone } from '@/components/ui'
 import { cn } from '@/lib/utils'
 import type { KycStatus } from '@/types'
 
@@ -10,14 +10,6 @@ const toneText: Record<BadgeTone, string> = {
   brand: 'text-brand',
   info: 'text-info',
   accent: 'text-accent',
-}
-
-export function KycBadge({ status, className }: { status: KycStatus; className?: string }) {
-  return (
-    <Badge tone={toneForStatus(status)} dot className={cn('capitalize', className)}>
-      {status}
-    </Badge>
-  )
 }
 
 export function KycStatusText({

@@ -5,13 +5,13 @@ import {
   Avatar,
   DataTable,
   Pagination,
+  StatusBadge,
   ViewLink,
   type Column,
   type Selection,
 } from '@/components/ui'
 import { formatCompactCurrency } from '@/lib/format'
 import type { ClientProfile, Paginated } from '@/types'
-import { KycBadge } from './KycBadge'
 
 interface ClientsTableProps {
   data: Paginated<ClientProfile> | undefined
@@ -61,7 +61,7 @@ const columns: Column<ClientProfile>[] = [
     key: 'kyc',
     header: 'KYC STATUS',
     headerClassName: headerClass,
-    cell: (client) => <KycBadge status={client.kycStatus} />,
+    cell: (client) => <StatusBadge status={client.kycStatus} dot />,
   },
   {
     key: 'action',

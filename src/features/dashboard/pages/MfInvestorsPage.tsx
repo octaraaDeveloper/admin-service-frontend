@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { dashboardApi } from '@/api/dashboard'
+import { StatusBadge } from '@/components/ui/Badge'
 import type { Column } from '@/components/ui/DataTable'
 import { useQuery } from '@/hooks/useQuery'
 import { formatCurrency, formatNumber } from '@/lib/format'
 import type { MfInvestor } from '@/types'
 import { CardStat, DRILLDOWN_PAGE_SIZE, DrilldownPage, describe } from '../components/DrilldownPage'
 import { InvestorCell } from '../components/InvestorCell'
-import { KycBadge } from '../components/KycBadge'
 
 const columns: Column<MfInvestor>[] = [
   {
@@ -34,7 +34,7 @@ const columns: Column<MfInvestor>[] = [
     key: 'kyc',
     header: 'KYC',
     align: 'center',
-    cell: (row) => <KycBadge status={row.kycStatus} />,
+    cell: (row) => <StatusBadge status={row.kycStatus} dot />,
   },
   {
     key: 'folios',
@@ -50,7 +50,7 @@ function renderMobileCard(row: MfInvestor) {
     <div className="flex flex-col gap-3">
       <div className="flex items-start justify-between gap-3">
         <InvestorCell clientId={row.clientId} name={row.name} avatarUrl={row.avatarUrl} />
-        <KycBadge status={row.kycStatus} />
+        <StatusBadge status={row.kycStatus} dot />
       </div>
       <div className="grid grid-cols-2 gap-x-3 gap-y-2">
         <CardStat label="Investment" value={formatCurrency(row.investment)} />

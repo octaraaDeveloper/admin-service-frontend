@@ -4,7 +4,7 @@ import { formatCompactCurrency } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { FamilyMember, FamilyRelationship } from '@/types'
 
-export const relationshipTone: Record<FamilyRelationship, BadgeTone> = {
+const relationshipTone: Record<FamilyRelationship, BadgeTone> = {
   Self: 'brand',
   Father: 'info',
   Mother: 'accent',

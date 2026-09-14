@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { dashboardApi } from '@/api/dashboard'
+import { StatusBadge } from '@/components/ui/Badge'
 import type { Column } from '@/components/ui/DataTable'
 import { Select, type SelectOption } from '@/components/ui/Select'
 import { useQuery } from '@/hooks/useQuery'
@@ -7,7 +8,6 @@ import { formatCurrency, formatNumber } from '@/lib/format'
 import type { SipInvestor, SipOptionsRange } from '@/types'
 import { CardStat, DRILLDOWN_PAGE_SIZE, DrilldownPage, describe } from '../components/DrilldownPage'
 import { InvestorCell } from '../components/InvestorCell'
-import { KycBadge } from '../components/KycBadge'
 
 const rangeOptions: SelectOption<SipOptionsRange>[] = [
   { value: '1m', label: '1 month' },
@@ -39,7 +39,7 @@ const columns: Column<SipInvestor>[] = [
     key: 'kyc',
     header: 'KYC',
     align: 'center',
-    cell: (row) => <KycBadge status={row.kycStatus} />,
+    cell: (row) => <StatusBadge status={row.kycStatus} dot />,
   },
   {
     key: 'activeSips',
@@ -60,7 +60,7 @@ function renderMobileCard(row: SipInvestor) {
     <div className="flex flex-col gap-3">
       <div className="flex items-start justify-between gap-3">
         <InvestorCell clientId={row.clientId} name={row.name} avatarUrl={row.avatarUrl} />
-        <KycBadge status={row.kycStatus} />
+        <StatusBadge status={row.kycStatus} dot />
       </div>
       <div className="grid grid-cols-3 gap-x-3 gap-y-2">
         <CardStat label="Total SIP" value={formatCurrency(row.totalSipAmount)} />
