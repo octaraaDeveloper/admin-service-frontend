@@ -25,6 +25,8 @@ const segmentLabels: Record<string, string> = {
   transact: 'Transact',
   'auto-mandate': 'Auto mandate',
   transactions: 'Transactions',
+  portfolio: 'Portfolio',
+  report: 'Report',
   explore: 'Explore',
 }
 
