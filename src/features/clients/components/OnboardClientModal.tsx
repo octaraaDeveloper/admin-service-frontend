@@ -4,6 +4,7 @@ import { FormError } from '@/components/common'
 import { Button, Modal } from '@/components/ui'
 import { useInvalidate } from '@/hooks/useQuery'
 import { useMutation } from '@/hooks/useMutation'
+import { toIsoDate } from '@/lib/format'
 import type { ClientProfile } from '@/types'
 import {
   ContactStep,
@@ -39,7 +40,7 @@ export function OnboardClientModal({ open, onClose, onCreated }: OnboardClientMo
       pan: kyc.verification.pan,
       name: kyc.verification.name,
       address: kyc.verification.address,
-      dob: kyc.dob.toISOString().slice(0, 10),
+      dob: toIsoDate(kyc.dob),
     })
     if (!client) return
     setCreated(client)

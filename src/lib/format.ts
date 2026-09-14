@@ -12,6 +12,7 @@ const dateTimeFormatter = new Intl.DateTimeFormat(LOCALE, {
   hour: '2-digit',
   minute: '2-digit',
 })
+const monthYearFormatter = new Intl.DateTimeFormat(LOCALE, { month: 'short', year: 'numeric' })
 const numberFormatter = new Intl.NumberFormat(LOCALE, { maximumFractionDigits: 0 })
 const decimalFormatter = new Intl.NumberFormat(LOCALE, {
   minimumFractionDigits: 2,
@@ -28,10 +29,21 @@ export function formatDate(value: string | number | Date | null | undefined) {
   return Number.isNaN(date.getTime()) ? '—' : dateFormatter.format(date)
 }
 
+export function toIsoDate(date: Date) {
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${date.getFullYear()}-${month}-${day}`
+}
+
 export function formatDateTime(value: string | number | Date | null | undefined) {
   if (!value) return '—'
   const date = toDate(value)
   return Number.isNaN(date.getTime()) ? '—' : dateTimeFormatter.format(date)
+}
+
+export function formatMonthYear(value: string | number | Date) {
+  const date = toDate(value)
+  return Number.isNaN(date.getTime()) ? '—' : monthYearFormatter.format(date)
 }
 
 export function formatNumber(value: number) {

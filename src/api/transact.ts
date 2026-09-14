@@ -118,7 +118,7 @@ export const transactApi = {
   sendPaymentLink(order: OrderRequest): Promise<PaymentLinkResult> {
     const client = clientById(order.clientId)
     if (!client) return mockFailure('Client not found')
-    if (client.kycStatus === 'rejected' || client.kycStatus === 'expired') {
+    if (client.kycStatus !== 'verified') {
       return mockFailure(
         `Payment links can only be sent to KYC-verified clients. ${client.name}'s KYC is ${client.kycStatus}.`,
       )

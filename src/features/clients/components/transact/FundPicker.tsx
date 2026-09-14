@@ -147,7 +147,7 @@ export function FundPicker({ amcId, amcs, value, onChange, onClearAmc, error }: 
         className="sm:hidden"
       />
       <div className="min-w-0 flex-1">
-        <p className="text-[15px] leading-5 font-medium text-text-primary">{value.name}</p>
+        <p className="text-md font-medium text-text-primary">{value.name}</p>
         <p className="mt-0.5 text-xs text-text-muted">
           {[value.plan, value.assetClass, value.category]
             .filter((item, index, list) => list.indexOf(item) === index)

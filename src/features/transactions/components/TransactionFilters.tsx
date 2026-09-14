@@ -10,7 +10,6 @@ interface TransactionFiltersProps {
   filters: Filters
   onChange: (patch: Partial<Filters>) => void
   /** Number of rows currently selected in the table. */
-  selectedCount: number
   /** Selected rows that still have a pending payment link. */
   pendingSelectedCount: number
   onResend: () => void
@@ -23,7 +22,6 @@ interface TransactionFiltersProps {
 export function TransactionFilters({
   filters,
   onChange,
-  selectedCount,
   pendingSelectedCount,
   onResend,
   onCancel,
@@ -74,7 +72,7 @@ export function TransactionFilters({
             variant="outline"
             leftIcon={<Forward />}
             onClick={onResend}
-            disabled={selectedCount === 0}
+            disabled={pendingSelectedCount === 0}
             loading={resending}
           >
             Resend link

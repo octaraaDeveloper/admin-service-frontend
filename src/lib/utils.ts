@@ -32,6 +32,10 @@ export function downloadCsv(filename: string, headers: string[], rows: (string |
   URL.revokeObjectURL(url)
 }
 
+const FORMULA_PREFIX = /^[\s\t\r]*[=+@]|^[\s\t\r]*-(?![\d.])/
+
 function escapeCsv(value: string | number) {
-  return `"${String(value).replaceAll('"', '""')}"`
+  const text = String(value)
+  const safe = typeof value === 'string' && FORMULA_PREFIX.test(text) ? `'${text}` : text
+  return `"${safe.replaceAll('"', '""')}"`
 }

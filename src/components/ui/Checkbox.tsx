@@ -25,7 +25,7 @@ export function Checkbox({
       checked={checked}
       onCheckedChange={(next) => onChange(next === true)}
       disabled={disabled}
-      className="flex size-[18px] shrink-0 items-center justify-center rounded-[4px] border border-border-strong bg-surface-raised text-brand-foreground focus-ring transition-colors disabled:opacity-50 data-[state=checked]:border-brand data-[state=checked]:bg-brand data-[state=indeterminate]:border-brand data-[state=indeterminate]:bg-brand"
+      className="relative flex size-[18px] shrink-0 items-center justify-center rounded-[4px] border border-border-strong bg-surface-raised text-brand-foreground focus-ring transition-colors before:absolute before:-inset-3 before:content-[''] disabled:opacity-50 data-[state=checked]:border-brand data-[state=checked]:bg-brand data-[state=indeterminate]:border-brand data-[state=indeterminate]:bg-brand"
       {...aria}
     >
       <CheckboxPrimitive.Indicator>

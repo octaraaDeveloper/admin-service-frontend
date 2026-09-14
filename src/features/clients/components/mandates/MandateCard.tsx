@@ -1,16 +1,12 @@
 import { Landmark, Trash2 } from 'lucide-react'
 import { Card, IconButton } from '@/components/ui'
-import { formatCurrency, formatDate } from '@/lib/format'
+import { formatCurrency, formatDate, formatMonthYear } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { AutoMandate } from '@/types'
 
 const statusClass: Record<AutoMandate['status'], string> = {
   Active: 'text-success',
   Processing: 'text-warning',
-}
-
-function formatValidTill(date: string) {
-  return new Date(date).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })
 }
 
 export function MandateCard({
@@ -48,7 +44,7 @@ export function MandateCard({
             </dd>
             <dd className="mt-1">
               {formatCurrency(mandate.amountLimit)} • Valid till{' '}
-              {formatValidTill(mandate.validTill)}
+              {formatMonthYear(mandate.validTill)}
             </dd>
           </dl>
 
@@ -74,7 +70,7 @@ export function MandateCard({
                 Validity
               </dt>
               <dd className="mt-0.5 font-medium text-text-primary">
-                {formatValidTill(mandate.validTill)}
+                {formatMonthYear(mandate.validTill)}
               </dd>
             </div>
           </dl>

@@ -29,9 +29,8 @@ export function TransactionsView({ list, showClient = true, actions }: Transacti
       <TransactionFilters
         filters={list.filters}
         onChange={list.updateFilters}
-        selectedCount={list.selected.size}
         pendingSelectedCount={list.pendingSelected.length}
-        onResend={() => list.resendLinks([...list.selected])}
+        onResend={() => list.resendLinks(list.pendingSelected.map((row) => row.id))}
         onCancel={() => list.requestCancel(list.pendingSelected.map((row) => row.id))}
         resending={list.resending}
       >

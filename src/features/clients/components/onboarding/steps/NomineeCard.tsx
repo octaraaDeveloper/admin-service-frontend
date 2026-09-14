@@ -1,5 +1,6 @@
 import { ChevronDown, Info, Trash2, User } from 'lucide-react'
 import { Badge, Button, DatePicker, Input, Select } from '@/components/ui'
+import { toIsoDate } from '@/lib/format'
 import { cn } from '@/lib/utils'
 import type { Nominee, OnboardingFormOptions } from '@/types'
 import { nomineeField, type FieldErrors } from '../onboardingState'
@@ -14,13 +15,6 @@ interface NomineeCardProps {
   onRemove?: () => void
   errors: FieldErrors
   options: OnboardingFormOptions
-}
-
-function toIsoDate(date: Date | undefined) {
-  if (!date) return undefined
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${date.getFullYear()}-${month}-${day}`
 }
 
 export function NomineeCard({
@@ -75,7 +69,7 @@ export function NomineeCard({
             <DatePicker
               label="Date of Birth"
               value={nominee.dateOfBirth ? new Date(nominee.dateOfBirth) : undefined}
-              onChange={(date) => onChange({ dateOfBirth: toIsoDate(date) })}
+              onChange={(date) => onChange({ dateOfBirth: date ? toIsoDate(date) : undefined })}
               maxDate={new Date()}
               placeholder="DD/MM/YYYY"
               error={error('dateOfBirth')}

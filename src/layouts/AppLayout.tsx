@@ -13,7 +13,14 @@ export function AppLayout() {
   const online = useOnline()
   const location = useLocation()
 
-  if (!token) return <Navigate to="/login" replace state={{ from: location.pathname }} />
+  if (!token)
+    return (
+      <Navigate
+        to="/login"
+        replace
+        state={{ from: `${location.pathname}${location.search}${location.hash}` }}
+      />
+    )
 
   return (
     <div className="min-h-dvh bg-surface">

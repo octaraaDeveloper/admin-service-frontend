@@ -4,6 +4,7 @@ import { FormError } from '@/components/common'
 import { Button, DatePicker, Input, Modal, Select } from '@/components/ui'
 import { useMutation } from '@/hooks/useMutation'
 import { useInvalidate } from '@/hooks/useQuery'
+import { toIsoDate } from '@/lib/format'
 import { toast } from '@/store/toast'
 import type { AutoMandate } from '@/types'
 
@@ -17,10 +18,6 @@ function addYears(date: Date, years: number) {
   const next = new Date(date)
   next.setFullYear(next.getFullYear() + years)
   return next
-}
-
-function toIsoDate(date: Date) {
-  return date.toISOString().slice(0, 10)
 }
 
 interface CreateMandateModalProps {

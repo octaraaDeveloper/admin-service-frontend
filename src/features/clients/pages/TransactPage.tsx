@@ -38,7 +38,7 @@ export default function TransactPage() {
     refetch,
   } = useQuery(`transact:client:${clientId}`, () => transactApi.client(clientId), Boolean(clientId))
 
-  const kycBlocked = client && (client.kycStatus === 'rejected' || client.kycStatus === 'expired')
+  const kycBlocked = client && client.kycStatus !== 'verified'
 
   return (
     <div className="flex flex-col gap-5 pb-24 lg:pb-0">

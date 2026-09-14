@@ -29,7 +29,10 @@ export function SearchInput({
     setDraft(value)
   }
 
-  useEffect(() => () => clearTimeout(timer.current), [])
+  useEffect(() => {
+    clearTimeout(timer.current)
+    return () => clearTimeout(timer.current)
+  }, [value])
 
   const update = (next: string, immediate = false) => {
     setDraft(next)

@@ -1,6 +1,6 @@
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
-import type { ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { Button } from './Button'
 
@@ -36,12 +36,17 @@ export function Modal({
   className,
   bodyClassName,
 }: ModalProps) {
+  const contentRef = useRef<HTMLDivElement>(null)
   return (
     <DialogPrimitive.Root open={open} onOpenChange={(next) => !next && onClose()}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-surface-overlay backdrop-blur-[2px] data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0" />
         <DialogPrimitive.Content
-          onOpenAutoFocus={(event) => event.preventDefault()}
+          ref={contentRef}
+          onOpenAutoFocus={(event) => {
+            event.preventDefault()
+            contentRef.current?.focus()
+          }}
           className={cn(
             'fixed inset-x-0 bottom-0 z-50 flex max-h-[92dvh] w-full flex-col rounded-t-2xl border border-border bg-surface-raised shadow-2xl outline-none',
             'data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:slide-out-to-bottom-8 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:slide-in-from-bottom-8',

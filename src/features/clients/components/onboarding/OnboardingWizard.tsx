@@ -50,6 +50,7 @@ export function OnboardingWizard({
   const verifyBank = useMutation(onboardingApi.verifyBank)
   const sendLink = useMutation(onboardingApi.sendVerificationLink)
   const invalidate = useInvalidate()
+  const draftKey = `onboarding:draft:${client.id}`
 
   const step = ONBOARDING_STEPS[state.stepIndex]
   const verifying = state.bankPhase === 'verifying'
@@ -89,12 +90,13 @@ export function OnboardingWizard({
     data: OnboardingData[S] = state.data[key],
   ) => {
     const result = await saveStep.mutate(client.id, key, data)
+    if (result !== undefined) invalidate(draftKey)
     return result !== undefined
   }
 
   const finish = () => {
     toast.success(`Verification link sent to ${client.name}`)
-    invalidate(`onboarding:draft:${client.id}`)
+    invalidate(draftKey)
     invalidate('clients')
     onClose()
   }

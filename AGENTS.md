@@ -23,7 +23,8 @@ src/
   assets/       logos (logo.svg, logo-light.svg, logo-mark.svg)
   components/
     ui/         generic primitives: Button, Input, Select, DataTable, Modal, Tabs, … (Tailwind + Radix)
-    common/     app-aware shared pieces: PageHeader, states (Empty/Error/Offline), Toaster, FormError
+    common/     app-aware shared pieces: PageHeader, states (Empty/Error/Offline), Toaster, FormError,
+                Monogram (AMC/bank initials), RiskBadge, ReturnValue (signed % colouring)
   config/       env.ts (VITE_* vars), navigation.ts (sidebar items + breadcrumb labels)
   features/     one folder per flow: auth, dashboard, clients, transactions, explore
     <feature>/pages/       route components (default export, lazy loaded from App.tsx)
@@ -62,6 +63,13 @@ export const clientsApi = {
 
 Nothing in `features/` changes. When all modules are wired, delete `src/mocks/`.
 
+Mock behaviours to remember while the backend is not wired: any email/password logs in (`wrong` fails), OTP is
+`123456` everywhere, bank account numbers ending in `0000` fail verification, and in-memory writes (onboarded
+clients, cancelled orders, mandates) reset on reload.
+
+Auth: `store/auth.ts` persists the bearer token in `localStorage` (`octaraa-auth`) for the mock. When the real
+backend lands, prefer an HttpOnly session cookie and keep `token` out of the persisted state (`persist` `partialize`).
+
 - `api/client.ts` normalises every failure into `ApiError { status, code, message, fieldErrors, isNetworkError }`
   and logs the user out on 401. `VITE_API_BASE_URL` sets the base URL (`.env.example`).
 - Reads: `useQuery(key, fetcher)` → `{ data, error, loading, refetch }`. Keys are `'<domain>:<params>'`.
@@ -82,7 +90,8 @@ Nothing in `features/` changes. When all modules are wired, delete `src/mocks/`.
   `text-lg` 18, `text-xl` 20, `text-2xl` 26, `text-3xl` 38. Font is Poppins everywhere.
 - Radii: `rounded-control` (10px) for inputs/buttons, `rounded-card` (12px) for cards. `card` utility = card
   surface + border + radius.
-- Dates via `formatDate` (dd MMM yyyy, en-IN). Money via `formatCurrency` / `formatCompactCurrency` (₹, Cr/L).
+- Dates via `formatDate` (dd MMM yyyy, en-IN), `formatDateTime`, `formatMonthYear`; API date payloads via
+  `toIsoDate` (local calendar date, never `toISOString().slice(0, 10)` — it shifts a day in IST). Money via `formatCurrency` / `formatCompactCurrency` (₹, Cr/L).
   Percentages via `formatPercent`. Never hand-format these.
 - Search inputs use `SearchInput` (debounced 350ms). Selects use `Select` (Radix). Status pills use
   `StatusBadge` / `Badge`. Page titles use `PageHeader` (breadcrumbs derive from `config/navigation.ts`).
