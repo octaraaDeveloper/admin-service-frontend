@@ -39,7 +39,8 @@ export function breadcrumbsFor(pathname: string): Crumb[] {
   const segments = pathname.split('/').filter(Boolean)
   if (segments.length === 0) return [{ label: 'Dashboard', to: '/' }]
   return segments.map((segment, index) => ({
-    label: segmentLabels[segment] ?? 'Details',
+    label:
+      segmentLabels[segment] ?? (segments[index - 1] === 'clients' ? 'Client profile' : 'Details'),
     to: `/${segments.slice(0, index + 1).join('/')}`,
   }))
 }

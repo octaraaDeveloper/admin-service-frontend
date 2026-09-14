@@ -26,6 +26,11 @@ export function Popover({
         <PopoverPrimitive.Content
           align={align}
           sideOffset={6}
+          collisionPadding={8}
+          style={{
+            maxHeight: 'var(--radix-popover-content-available-height)',
+            overflowY: 'auto',
+          }}
           className={cn(
             'z-50 rounded-control border border-border bg-surface-raised p-3 shadow-lg outline-none data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95',
             className,
