@@ -36,7 +36,8 @@
     "jsx-a11y/no-autofocus": "off",
     "unicorn/consistent-function-scoping": "off",
     "react/memo-dependencies": "off",
-    "react/exhaustive-effect-dependencies": "off"
+    "react/exhaustive-effect-dependencies": "off",
+    "oxc/no-map-spread": "off"
   },
   "ignorePatterns": ["dist", "node_modules"]
 }
